@@ -8,5 +8,5 @@ urlpatterns = [
     path("test2", views.test2),
     path("test3", views.test3),
     path("<int:month>", views.monthly_challenges_by_number),
-    path("<str:month>", views.monthly_challenge)
+    path("<str:month>", views.monthly_challenge, name="month-challenge")
 ]

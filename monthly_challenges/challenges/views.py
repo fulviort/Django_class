@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
 
 monthly_challenges = {
-    "january:": "This works in january, eat fruits!",
+    "january": "This works in january, eat fruits!",
     "february": "This works in february, study atleast 20 minutes",
     "march": "This works in march, eat veggies",
     "april": "This works in march, eat veggies",
@@ -32,14 +33,27 @@ def test3(request):
 
 
 def monthly_challenges_by_number(request, month):
-    return HttpResponse(month)
+    months = list(monthly_challenges.keys())
+
+    if month > len(months):
+        return HttpResponseNotFound("Invalid month")
+    
+    redirect_month = months[month - 1]
+
+    # dynamic way
+    redirect_path = reverse("month-challenge", args=[redirect_month]) #/challenges/january
+    return HttpResponseRedirect(redirect_path)
+
+    # static way
+    """return HttpResponseRedirect("/challenges/" + redirect_month)"""
 
 def monthly_challenge(request, month):
     try:
         challenge_text = monthly_challenges[month]
-        return HttpResponse(challenge_text)
+        responde_data = f"<h1>{challenge_text}</h1>"
+        return HttpResponse(responde_data)
     except:
-        return HttpResponseNotFound("This month is not supported!")
+        return HttpResponseNotFound("<h1>This month is not supported!</h1>")
 
     """if month == 'january':
         return HttpResponse("This works in january, eat fruits!")

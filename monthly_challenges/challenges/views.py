@@ -20,6 +20,19 @@ monthly_challenges = {
 # Create your views here.
 
 
+def index(request):
+    list_items = ""
+    months = list(monthly_challenges.keys())
+
+    for month in months:
+        capitalized_month = month.capitalize()
+        month_path = reverse("month-challenge", args=[month])
+        list_items += f"<li><a href=\"{month_path}\">{capitalized_month}</a></li>"
+
+    response_data = f"<ul>{list_items}</ul>"
+    return HttpResponse(response_data)
+
+
 def test1(request):
     return HttpResponse("test1")
 
@@ -37,15 +50,17 @@ def monthly_challenges_by_number(request, month):
 
     if month > len(months):
         return HttpResponseNotFound("Invalid month")
-    
+
     redirect_month = months[month - 1]
 
     # dynamic way
-    redirect_path = reverse("month-challenge", args=[redirect_month]) #/challenges/january
+    # /challenges/january
+    redirect_path = reverse("month-challenge", args=[redirect_month])
     return HttpResponseRedirect(redirect_path)
 
     # static way
     """return HttpResponseRedirect("/challenges/" + redirect_month)"""
+
 
 def monthly_challenge(request, month):
     try:
@@ -63,4 +78,3 @@ def monthly_challenge(request, month):
         return HttpResponse("This works in march, eat veggies")
     else:
         return HttpResponseNotFound("this month is not registered")"""
-    

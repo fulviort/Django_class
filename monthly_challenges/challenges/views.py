@@ -16,7 +16,8 @@ monthly_challenges = {
     "october": "This works in october, eat veggies10",
     "november": "This works in november, eat veggies11",
     "december": None,
-    "drug test": "This works in drug test, eat veggies12"
+    "drug test": "This works in drug test, eat veggies12",
+    "2nd drug test": "This works in 2nd drug test, eat veggies24"
 }
 
 # Create your views here.

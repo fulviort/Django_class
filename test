@@ -1,0 +1,7 @@
+asdasdasda
+
+{
+    "python.languageServer": "Pylance",
+    "files.associations": {
+        "*.html": "html"}
+}

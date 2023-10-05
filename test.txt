@@ -1,0 +1,12 @@
+
+extracted:
+
+1) 
+    <link rel="stylesheet" href="{% static "style.css"%}">
+
+2) 
+{
+    "python.languageServer": "Pylance",
+    "files.associations": {
+        "*.html": "html"}
+}

@@ -5,7 +5,7 @@ from django.template.loader import render_to_string
 
 
 def starting_page(request):
-    return HttpResponse("pagina principal")
+    return render(request, "blog/index.html")
 
 def posts(request):
     return HttpResponse("Es la pagina de los posts")

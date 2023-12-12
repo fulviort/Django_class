@@ -34,7 +34,7 @@ all_posts = [
         "author": "XSY",
         "date": date(2023, 10, 10),
         "title": "XES is GREAT!",
-        "excerpt": "This is the most incredible thought",
+        "excerpt": "This is the most incredible and pleasant thought",
         "content": """
             Lorem ipsum dolor sit amet consectetur, adipisicing elit.
             Deleniti labore aliquid itaque, incidunt fuga est illum doloremque earum reprehenderit? 
@@ -56,7 +56,12 @@ def starting_page(request):
     })
 
 def posts(request):
-    return render(request, "blog/all-posts.html")
+    return render(request, "blog/all-posts.html", {
+        "all_posts": all_posts
+    })
 
 def detailed_post(request, slug):
-    return render(request, "blog/post-detail.html")
+    identify_post = next(post for post in all_posts if post['slug'] == slug)
+    return render(request, "blog/post-detail.html", {
+        "post": identify_post
+    })
